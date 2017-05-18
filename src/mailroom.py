@@ -2,9 +2,9 @@
 
 
 DONORS = {
-    'Anna Shelby': [300],
-    'Morgan Nomura': [10],
-    'Edgar Allan Poe': [1000]
+    'ANNA SHELBY': [300],
+    'MORGAN NOMURA': [10],
+    'EDGAR POE': [1000]
 }
 
 
@@ -20,15 +20,45 @@ def user_prompt():
     print('Would you like to write a thank you email to a donor or see a report of past donations?')
     choice = input('Type T for thank you or R for report: ').upper()
     options = ['T', 'R', 'Q']
-    if choice not in options:
+    while choice not in options:
         print('Sorry, there is no option for what you typed.')
-        choice = input('Please type T for thank you or R for report, or Q to quit:')
-    elif choice == 'R':
-        print('You chose report!!')
+        choice = input('Please type T for thank you or R for report, or Q to quit: ').upper()
+    if choice == 'R':
+        print('--------------------------------------------')
+        print('You chose report!!!')
     elif choice == 'T':
-        print('You chose THANK YOU EMAIL!!')
+        thank_you_email()
     else:
-        pass
+        print('Thank you for looking at our program!')
+        exit()
+
+
+def thank_you_email():
+    """Function that creates the thank you email for the user."""
+    print('--------------------------------------------')
+    print('You chose THANK YOU EMAIL!!')
+    print('Type B to return to main options')
+    #user_input = input('Enter First Name and Last Name for donor or type L to see a list of donors: ').upper().strip()
+    user_input_valid = False 
+    options = ['B', 'L']
+    while not user_input_valid:
+        user_input = input('Enter First Name and Last Name for donor or type L to see a list of donors: ').upper().strip()
+        if len(user_input.split(' ')) == 2 or user_input in options:
+            user_input_valid = True 
+            print('we got here')
+    print(user_input)
+
+
+def build_email():
+    print('--------------------------------------------')
+    print('WE ARE BUILDING AN EMAIL!')
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':  # pragma no cover
