@@ -12,7 +12,7 @@
         if report, invoke building a report
 
 ### function: sending a thank you
-    user alert: Type 'back' to get back to the original prompt
+    user alert: Type 'back' to get back to the original prompt or 'quit'
     user input: choose between full name, seeing a list, (q), (back)
         if full name, invoke identifying a name function
         if seeing a list
@@ -26,12 +26,12 @@
 ### function: identifying name
     look into data structure for name
     if the name is in the data structure, return it
-    if the name isn't in the list, create it
+    if the name isn't in the list, use name as key in data structure
     invoke function for adding a donation
 
 ### function: adding a donation:
-    user input: enter donation amount, (q), (back)
-    verify input is a number
+    user input: enter donation amount (permit one amount, or CSV?, (q), (back)
+    verify input is a number / rounded float with 2 dec (or parse?)
     if input is not a number, reprompt, (q), (back)
     if input is a number, add to donor name
 
