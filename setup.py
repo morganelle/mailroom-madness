@@ -21,7 +21,7 @@ setup(
     extras_require=extra_packages,
     entry_points={
         'console_scripts': [
-            'mailroom_madness mailroom_madness:main'
+            'mailroom_madness = mailroom_madness:main'
         ]
     }
 )
