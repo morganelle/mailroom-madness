@@ -1,5 +1,4 @@
 """This is our tests for our mailroom madness program."""
-import pytest
 
 DONORS = {
     'ANNA SHELBY': [300],
@@ -15,4 +14,4 @@ def test_validate_user_name_input():
 def test_show_list():
     """Test for showing donors list is a list."""
     from mailroom import show_list
-    assert show_list(DONORS) == ['ANNA SHELBY', 'MORGAN NOMURA', 'EDGAR POE']
+    assert show_list(DONORS) == ['ANNA SHELBY', 'EDGAR POE', 'MORGAN NOMURA']

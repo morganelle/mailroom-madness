@@ -64,7 +64,9 @@ def validate_user_name_input():
 
 def show_list(donor_list):
     """Convert donor key name to list."""
-    return list(donor_list.keys()).sort()
+    donor_lists = list(donor_list.keys())
+    donor_lists.sort()
+    return donor_lists
 
 
 def build_email():
