@@ -38,7 +38,6 @@ def thank_you_email():
     print('--------------------------------------------')
     print('You chose THANK YOU EMAIL!!')
     print('Type B to return to main options')
-    #user_input = input('Enter First Name and Last Name for donor or type L to see a list of donors: ').upper().strip()
     user_input_valid = False 
     options = ['B', 'L']
     while not user_input_valid:
@@ -46,7 +45,12 @@ def thank_you_email():
         if len(user_input.split(' ')) == 2 or user_input in options:
             user_input_valid = True 
             print('we got here')
-    print(user_input)
+    if user_input == 'L':
+        print(DONORS)
+    elif user_input == 'B':
+        user_prompt()
+    else:
+        build_email()
 
 
 def build_email():
