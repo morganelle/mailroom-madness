@@ -42,7 +42,7 @@ You chose THANK YOU EMAIL!!
         ''')
     user_input = validate_user_name_input()
     if user_input == 'L':
-        print(show_list())
+        print(show_list(DONORS))
         # user_input = validate_user_name_input()
     elif user_input == 'B':
         user_prompt()
@@ -62,9 +62,9 @@ def validate_user_name_input():
             return user_input
 
 
-def show_list():
+def show_list(donor_list):
     """Convert donor key name to list."""
-    return list(DONORS.keys())
+    return list(donor_list.keys())
 
 
 def build_email():
