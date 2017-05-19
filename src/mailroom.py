@@ -47,7 +47,7 @@ Type B to return to main options
     elif user_input == 'B':
         user_prompt()
     else:
-        build_email()
+        add_donation(user_input, DONORS)
 
 
 def validate_user_name_input():
@@ -67,6 +67,21 @@ def show_list(donor_list):
     donor_lists = list(donor_list.keys())
     donor_lists.sort()
     return donor_lists
+
+
+def add_donation(string_name, donor_list):
+    """Add donation to donor."""
+    find_donor(string_name, donor_list)
+    donation_input = input('How much did {} donate? '.format(string_name))
+    donor_list[string_name].append(float(donation_input))
+    print(donor_list)
+
+
+def find_donor(string_name, donor_list):
+    """Create donor key in dictionary if it doesn't exist already."""
+    if string_name not in donor_list:
+        donor_list[string_name] = []
+    return donor_list[string_name]
 
 
 def build_email():

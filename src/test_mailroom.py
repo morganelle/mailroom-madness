@@ -15,3 +15,9 @@ def test_show_list():
     """Test for showing donors list is a list."""
     from mailroom import show_list
     assert show_list(DONORS) == ['ANNA SHELBY', 'EDGAR POE', 'MORGAN NOMURA']
+
+
+def test_find_donor():
+    """Test to determine a new user has been added."""
+    from mailroom import find_donor
+    assert find_donor('CAT POWERS', DONORS) == []
