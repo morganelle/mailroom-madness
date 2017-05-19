@@ -38,7 +38,7 @@ def thank_you_email():
     print('''
 --------------------------------------------
 You chose THANK YOU EMAIL!!
-'Type B to return to main options
+Type B to return to main options
         ''')
     user_input = validate_user_name_input()
     if user_input == 'L':
@@ -64,7 +64,7 @@ def validate_user_name_input():
 
 def show_list(donor_list):
     """Convert donor key name to list."""
-    return list(donor_list.keys())
+    return list(donor_list.keys()).sort()
 
 
 def build_email():
