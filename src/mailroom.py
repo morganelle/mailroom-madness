@@ -18,7 +18,7 @@ def user_prompt():
     """Function that prompts user to choose to write a thank you or build a report."""
     print('Type Q to quit the program anytime')
     print('Would you like to write a thank you email to a donor or see a report of past donations?')
-    choice = input('Type T for thank you or R for report: ').upper()
+    choice = input('Type T for thank you or R for report: ').upper()  # pragma no cover
     options = ['T', 'R', 'Q']
     while choice not in options:
         print('Sorry, there is no option for what you typed.')
@@ -40,22 +40,21 @@ def thank_you_email():
 You chose THANK YOU EMAIL!!
 Type B to return to main options
         ''')
-    user_input = validate_user_name_input()
+    user_input = validate_user_name_input(user_input=input('Enter First Name and Last Name for donor or type L to see a list of donors: ').upper().strip())  # pragma no cover
     if user_input == 'L':
         print(show_list(DONORS))
-        # user_input = validate_user_name_input()
+        thank_you_email()
     elif user_input == 'B':
         user_prompt()
     else:
         add_donation(user_input, DONORS)
 
 
-def validate_user_name_input():
+def validate_user_name_input(user_input):
     """Function that checks user inputs valid name or option."""
     user_input_valid = False
     options = ['B', 'L']
     while not user_input_valid:
-        user_input = input('Enter First Name and Last Name for donor or type L to see a list of donors: ').upper().strip()
         if len(user_input.split(' ')) == 2 or user_input in options:
             user_input_valid = True
             print('user input:', user_input)
@@ -72,7 +71,7 @@ def show_list(donor_list):
 def add_donation(string_name, donor_list):
     """Add donation to donor."""
     find_donor(string_name, donor_list)
-    donation_input = input('How much did {} donate? '.format(string_name))
+    donation_input = input('How much did {} donate? '.format(string_name))  # pragma no cover
     donor_list[string_name].append(float(donation_input))
     print(donor_list)
 

@@ -9,7 +9,8 @@ DONORS = {
 
 def test_validate_user_name_input():
     """Test for checking the user input is a first and last name."""
-
+    from mailroom import validate_user_name_input
+    assert validate_user_name_input('CAKE MCGEE') == 'CAKE MCGEE'
 
 def test_show_list():
     """Test for showing donors list is a list."""
