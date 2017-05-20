@@ -41,17 +41,24 @@ def main():
 def user_prompt():
     """Function that prompts user to choose to write a thank you or build a report."""
     print(MESSAGES['quit'])
-    choice = input(MESSAGES['email_or_report']).upper()  # pragma no cover
-    options = ['T', 'R', 'Q']
-    while choice not in options:
-        print(MESSAGES['sorry_prompt'])
-        choice = input(MESSAGES['email_or_report']).upper()
+    choice = validate_user_prompt()
     if choice == 'R':
         build_report()
     elif choice == 'T':
         thank_you_email()
     elif choice == 'Q':
         print(MESSAGES['goodbye'])
+
+
+def validate_user_prompt():
+    """Check user input for thank you or report."""
+    options = ['T', 'R', 'Q']
+    user_input = input(MESSAGES['email_or_report']).upper()  # pragma no cover
+    print(user_input)
+    while user_input not in options:
+        print(MESSAGES['sorry_prompt'])
+        user_input = input(MESSAGES['email_or_report']).upper()
+    return user_input
 
 
 def thank_you_email():
