@@ -7,38 +7,56 @@ DONORS = {  # pragma no cover
     'EDGAR POE': [1000]
 }
 
+WELCOME = '''
+\n
+Welcome to Mailroom Madness!\n
+Mailroom Madness is a state-of-the-art text-based interface
+designed to help charitable organizations track, list, and
+thank their donors.\n
+Would you like to write a thank you email to a donor
+or see a report of past donations?\n'''
+
+MESSAGES = {
+    'welcome': WELCOME,
+    'email_or_report': 'Type T for thank you or R for report: ',
+    'return_prompt': 'Type B to return to main options.',
+    'quit': 'Type Q to quit the program anytime.',
+    'sorry_prompt': 'Sorry, there is no option for what you typed.',
+    'sorry_input': 'Sorry, please enter a ',
+    'get_donor': 'Enter First and Last Name for donor or type L to see a list of donors: ',
+    'donation': 'number',
+    'donor_name': 'First and Last Name',
+    'input_donate': 'How much did {} donate?',
+    'goodbye': '\nThank you for using Mailroom Madness!\n',
+    'border': '--------------------------------------------'
+}
+
 
 def main():
     """Main function."""
+    print(MESSAGES['welcome'])
     user_prompt()
-    print('MAILROOM MADNESS!!')
 
 
 def user_prompt():
     """Function that prompts user to choose to write a thank you or build a report."""
-    print('Type Q to quit the program anytime')
-    print('Would you like to write a thank you email to a donor or see a report of past donations?')
-    choice = input('Type T for thank you or R for report: ').upper()  # pragma no cover
+    print(MESSAGES['quit'])
+    choice = input(MESSAGES['email_or_report']).upper()  # pragma no cover
     options = ['T', 'R', 'Q']
     while choice not in options:
-        print('Sorry, there is no option for what you typed.')
-        choice = input('Please type T to write a thank-you email or R to see a report, or Q to quit: ').upper()
+        print(MESSAGES['sorry_prompt'])
+        choice = input(MESSAGES['email_or_report']).upper()
     if choice == 'R':
-        print('--------------------------------------------')
-        print('You chose report!!!')
+        build_report()
     elif choice == 'T':
-        print('''
---------------------------------------------
-You chose THANK YOU EMAIL!!
-        ''')
         thank_you_email()
-    else:
-        final_choice()
+    elif choice == 'Q':
+        print(MESSAGES['goodbye'])
 
 
 def thank_you_email():
     """Function that creates the thank you email for the user."""
-    print('Type B to return to main options')
+    print(MESSAGES['return_prompt'])
     user_input = validate_user_name_input()
     if user_input == 'L':
         print(show_list(DONORS))
@@ -54,14 +72,14 @@ def validate_user_name_input():
     """Function that checks user inputs valid name or option."""
     user_input_valid = False
     options = ['B', 'L']
-    user_input = input('Enter First and Last Name for donor or type L to see a list of donors: ').upper().strip()  # pragma no cover
+    user_input = input(MESSAGES['get_donor']).upper().strip()  # pragma no cover
     while not user_input_valid:
         if len(user_input.split(' ')) == 2 or user_input in options:
             user_input_valid = True
             print('user input:', user_input)
             return user_input
         else:
-            print('Sorry, please enter a first and last name.')
+            print(MESSAGES['sorry'], MESSAGES['donor_name'], '.')
 
 
 def show_list(donor_list):
@@ -82,10 +100,10 @@ def add_donation(string_name, donor_list):
 
 def validate_donation_input(string_name):
     """Function that checks user inputs valid donation."""
-    donation_input = input('How much did {} donate? '.format(string_name))  # pragma no cover
+    donation_input = input(MESSAGES['input_donate'].format(string_name))  # pragma no cover
     while not donation_input.isnumeric():
-        print('Sorry, please enter a number.')
-        donation_input = input('How much did {} donate? '.format(string_name))  # pragma no cover
+        print(MESSAGES['sorry'], MESSAGES['donation'], '.')
+        donation_input = input('input_donate'.format(string_name))  # pragma no cover
     return donation_input
 
 
@@ -98,16 +116,15 @@ def find_donor(string_name, donor_list):
 
 def build_email():
     """Build a thank-you email."""
-    print('''
---------------------------------------------
-INSERT EMAIL HERE
-''')
+    print(MESSAGES['border'])
+    print('<insert email here>')
     final_choice()
 
 
 def build_report():
     """Build a report showing donors sorted by donation."""
-    print('You chose report!!!')
+    print(MESSAGES['border'])
+    print('<insert report here>')
     print(DONORS)
     final_choice()
 
@@ -119,7 +136,7 @@ def final_choice():
     if user_input == 'B':
         user_prompt()
     elif user_input == 'Q':
-        print('Thank you for using Mailroom Madness!')
+        print(MESSAGES['goodbye'])
         exit()
 
 
