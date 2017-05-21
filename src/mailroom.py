@@ -87,7 +87,7 @@ def validate_user_name_input():
             print('user input:', user_input)
             return user_input
         else:
-            print(MESSAGES['sorry'], MESSAGES['donor_name'], '.')
+            print(MESSAGES['sorry_input'], MESSAGES['donor_name'], '.')
 
 
 def show_list(donor_list):
@@ -110,7 +110,7 @@ def validate_donation_input(string_name):
     """Function that checks user inputs valid donation."""
     donation_input = input(MESSAGES['input_donate'].format(string_name))  # pragma no cover
     while not donation_input.isnumeric():
-        print(MESSAGES['sorry'], MESSAGES['donation'], '.')
+        print(MESSAGES['sorry_input'], MESSAGES['donation'], '.')
         donation_input = input('input_donate'.format(string_name))  # pragma no cover
     return donation_input
 
