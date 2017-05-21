@@ -50,6 +50,7 @@ def user_prompt():
         thank_you_email()
     elif choice == 'Q':
         print(MESSAGES['goodbye'])
+        exit()
 
 
 def validate_user_prompt():
@@ -90,7 +91,7 @@ def validate_user_name_input():
             print(MESSAGES['sorry_input'], MESSAGES['donor_name'], '.')
 
 
-def show_list(donor_list):
+def show_list(donor_list):  # Tested
     """Convert donor key name to list."""
     donor_lists = list(donor_list.keys())
     donor_lists.sort()
@@ -100,7 +101,7 @@ def show_list(donor_list):
 def add_donation(string_name, donor_list):
     """Add donation to donor."""
     find_donor(string_name, donor_list)
-    donation_input = validate_donation_input(string_name) # pragma no cover
+    donation_input = validate_donation_input(string_name)  # pragma no cover
     donor_list[string_name].append(float(donation_input))
     print(donor_list)
     return donor_list[string_name]
@@ -115,14 +116,14 @@ def validate_donation_input(string_name):
     return donation_input
 
 
-def find_donor(string_name, donor_list):
+def find_donor(string_name, donor_list):  # Tested
     """Create donor key in dictionary if it doesn't exist already."""
     if string_name not in donor_list:
         donor_list[string_name] = []
     return donor_list[string_name]
 
 
-def build_email(user_input):
+def build_email(user_input):  # Tested
     """Build a thank-you email."""
     print(MESSAGES['border'])
     email = 'insert email here for {} with donation {}'.format(user_input, DONORS[user_input][-1])
