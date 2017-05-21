@@ -125,9 +125,11 @@ def add_donation(string_name, donor_list):
 def validate_donation_input(string_name):
     """Function that checks user inputs valid donation."""
     donation_input = input(MESSAGES['input_donate'].format(string_name)).strip()  # pragma no cover
-    while not donation_input.isnumeric():
+    donation_input = float(donation_input.replace(',', ''))
+    while not type(donation_input) == float:
         print(MESSAGES['sorry_input'], MESSAGES['donation'], '.')
         donation_input = input(MESSAGES['input_donate'].format(string_name)).strip()  # pragma no cover
+        donation_input = float(donation_input.replace(',', ''))
     return donation_input
 
 
@@ -152,7 +154,7 @@ def build_report(donor_list):  # Tested
     print(MESSAGES['border_2'])
     report = "{:<30}{:<20}{:<20}{:<20}{}{}{}".format("Donor Name", "Total Donations", "# of Donations", "Avg. Amount", "\n", MESSAGES["border_2"], "\n")
     for name in donor_list:
-        report = report + "{:<30}{:<20}{:<20}{:<20.2f}{}".format(name, sum(donor_list[name]), len(donor_list[name]), sum(donor_list[name]) / len(donor_list[name]), "\n")
+        report = report + "{:<30}{:<20.2f}{:<20}{:<20.2f}{}".format(name, sum(donor_list[name]), len(donor_list[name]), sum(donor_list[name]) / len(donor_list[name]), "\n")
     print(report)
     return report
 
