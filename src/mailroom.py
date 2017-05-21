@@ -27,9 +27,10 @@ MESSAGES = {
     'get_donor': 'Enter First and Last Name for donor or type L to see a list of donors: ',
     'donation': 'number',
     'donor_name': 'First and Last Name.',
-    'input_donate': 'How much did {} donate? ',
+    'input_donate': 'How much did {} donate? $ ',
     'goodbye': '\nThank you for using Mailroom Madness!\n',
-    'border': '-' * 90
+    'border': '-' * 90,
+    'border_2': '_' * 90
 }
 
 
@@ -37,11 +38,12 @@ def main():
     """Main function."""
     print(MESSAGES['welcome'])
     user_prompt()
+    final_choice()
 
 
 def user_prompt():
     """Function that prompts user to choose to write a thank you or build a report."""
-    user_input = input(MESSAGES['email_or_report'] + MESSAGES['quit']).upper()  # pragma no cover
+    user_input = input(MESSAGES['email_or_report'] + MESSAGES['quit']).upper().strip()  # pragma no cover
     user_input = validate_user_prompt(user_input, ['T', 'R', 'Q'], user_prompt)
     execute_user_choice(user_input)
 
@@ -99,7 +101,6 @@ def validate_user_name_input():
     while not user_input_valid:
         if len(user_input.split(' ')) == 2 or user_input in options:
             user_input_valid = True
-            print('user input:', user_input)
             return user_input
         else:
             print(MESSAGES['sorry_input'], MESSAGES['donor_name'], '.')
@@ -116,18 +117,17 @@ def show_list(donor_list):  # Tested
 def add_donation(string_name, donor_list):
     """Add donation to donor."""
     find_donor(string_name, donor_list)
-    donation_input = validate_donation_input(string_name)  # pragma no cover
+    donation_input = validate_donation_input(string_name) # pragma no cover
     donor_list[string_name].append(float(donation_input))
-    print(donor_list)
     return donor_list[string_name]
 
 
 def validate_donation_input(string_name):
     """Function that checks user inputs valid donation."""
-    donation_input = input(MESSAGES['input_donate'].format(string_name))  # pragma no cover
+    donation_input = input(MESSAGES['input_donate'].format(string_name)).strip()  # pragma no cover
     while not donation_input.isnumeric():
         print(MESSAGES['sorry_input'], MESSAGES['donation'], '.')
-        donation_input = input(MESSAGES['input_donate'].format(string_name))  # pragma no cover
+        donation_input = input(MESSAGES['input_donate'].format(string_name)).strip()  # pragma no cover
     return donation_input
 
 
@@ -141,8 +141,7 @@ def find_donor(string_name, donor_list):  # Tested
 def build_email(user_input):  # Tested
     """Build a thank-you email."""
     print(MESSAGES['border'])
-    email = "Dear {}, {}".format(user_input, "\n" * 2) + "On behalf of our organization we would like to thank you for your donation of {}.{}".format(DONORS[user_input][-1], "\n" * 2) + "Kind regards,\nMailroom Madness\n{}".format(MESSAGES["border"])
-    #email = 'insert email here for {} with donation {}'.format(user_input, DONORS[user_input][-1])
+    email = "Dear {}, {}".format(user_input, "\n" * 2) + "On behalf of our organization we would like to thank you for your donation of $ {:.2f}.{}".format(DONORS[user_input][-1], "\n" * 2) + "Kind regards,\nMailroom Madness\n{}".format(MESSAGES["border"])
     print(email)
     final_choice()
     return email
@@ -150,18 +149,17 @@ def build_email(user_input):  # Tested
 
 def build_report(donor_list):  # Tested
     """Build a report showing donors sorted by donation."""
-    print(MESSAGES['border'])
-    report = "{:<30}{:<20}{:<20}{:<20}{}{}{}".format("Donor Name", "Total Donations", "# of Donations", "Avg. Amount", "\n", MESSAGES["border"], "\n")
+    print(MESSAGES['border_2'])
+    report = "{:<30}{:<20}{:<20}{:<20}{}{}{}".format("Donor Name", "Total Donations", "# of Donations", "Avg. Amount", "\n", MESSAGES["border_2"], "\n")
     for name in donor_list:
-        report = report + "{:<30}{:<20}{:<20}{:<20.2f}{}".format(name, sum(DONORS[name]), len(DONORS[name]), sum(DONORS[name]) / len(DONORS[name]), "\n")
+        report = report + "{:<30}{:<20}{:<20}{:<20.2f}{}".format(name, sum(donor_list[name]), len(donor_list[name]), sum(donor_list[name]) / len(donor_list[name]), "\n")
     print(report)
-    # final_choice()
     return report
 
 
 def final_choice():
     """Offer a choice to return to main options or exit."""
-    user_input = input(MESSAGES['return_prompt'] + MESSAGES['quit']).upper()  # pragma no cover
+    user_input = input(MESSAGES['return_prompt'] + MESSAGES['quit']).upper().strip()  # pragma no cover
     user_input = validate_user_prompt(user_input, ['B', 'Q'], final_choice)
     execute_user_choice(user_input)
 
