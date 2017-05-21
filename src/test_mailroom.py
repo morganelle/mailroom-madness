@@ -8,6 +8,12 @@ DONORS = {
 }
 
 
+def test_validate_user_prompt():
+    """Test to determine if letter command input is valid."""
+    from mailroom import validate_user_prompt, user_prompt
+    assert validate_user_prompt('T', ['T', 'R', 'Q'], user_prompt) == 'T'
+
+
 def test_show_list():
     """Test for showing donors list is a list."""
     from mailroom import show_list
