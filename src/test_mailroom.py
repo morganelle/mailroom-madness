@@ -21,21 +21,6 @@ REPORT_ENTRIES = [
     'EDGAR POE                     1000                1                   1000.00             '
 ]
 
-# USER_CHOICES = [
-#     ('Q', 'quit'),
-#     ('R', 'report'),
-#     ('T', 'thank you'),
-#     ('B', 'back'),
-#     ('Q', 'quit')
-# ]
-
-
-# @pytest.mark.parametrize('input, result', USER_CHOICES)
-# def test_excecute_user_choice(input, result):
-#     """Test to determine user inputs mapping to correct function call."""
-#     from mailroom import execute_user_choice
-#     assert execute_user_choice(input) == result
-
 
 def test_validate_user_prompt():
     """Test to determine if letter command input is valid."""
