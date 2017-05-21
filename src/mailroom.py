@@ -53,7 +53,7 @@ def execute_user_choice(user_input):
         exit()
         return 'quit'
     elif user_input == 'R':
-        build_report()
+        build_report(DONORS)
         return 'report'
     elif user_input == 'T':
         thank_you_email()
@@ -147,14 +147,14 @@ def build_email(user_input):  # Tested
     return email
 
 
-def build_report():
+def build_report(donor_list):
     """Build a report showing donors sorted by donation."""
     print(MESSAGES['border'])
     report = "{:<30}{:<20}{:<20}{:<20}{}{}{}".format("Donor Name", "Total Donations", "# of Donations", "Avg. Amount", "\n", MESSAGES["border"], "\n")
-    for name in DONORS:
+    for name in donor_list:
         report = report + "{:<30}{:<20}{:<20}{:<20.2f}{}".format(name, sum(DONORS[name]), len(DONORS[name]), sum(DONORS[name]) / len(DONORS[name]), "\n")
     print(report)
-    final_choice()
+    # final_choice()
     return report
 
 
