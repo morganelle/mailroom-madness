@@ -2,8 +2,8 @@
 
 
 DONORS = {  # pragma no cover
-    'ANNA SHELBY': [300],
-    'MORGAN NOMURA': [10],
+    'ANNA SHELBY': [300, 10, 15],
+    'MORGAN NOMURA': [10, 200, 50],
     'EDGAR POE': [1000]
 }
 
@@ -29,7 +29,7 @@ MESSAGES = {
     'donor_name': 'First and Last Name.',
     'input_donate': 'How much did {} donate? ',
     'goodbye': '\nThank you for using Mailroom Madness!\n',
-    'border': '--------------------------------------------'
+    'border': '-' * 90
 }
 
 
@@ -150,9 +150,10 @@ def build_email(user_input):  # Tested
 def build_report():
     """Build a report showing donors sorted by donation."""
     print(MESSAGES['border'])
-    report = '<insert report here>'
+    report = "{:<30}{:<20}{:<20}{:<20}{}{}{}".format("Donor Name", "Total Donations", "# of Donations", "Avg. Amount", "\n", MESSAGES["border"], "\n")
+    for name in DONORS:
+        report = report + "{:<30}{:<20}{:<20}{:<20.2f}{}".format(name, sum(DONORS[name]), len(DONORS[name]), sum(DONORS[name]) / len(DONORS[name]), "\n")
     print(report)
-    print(DONORS)
     final_choice()
 
 
