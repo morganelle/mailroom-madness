@@ -127,7 +127,7 @@ def validate_donation_input(string_name):
     donation_input = input(MESSAGES['input_donate'].format(string_name))  # pragma no cover
     while not donation_input.isnumeric():
         print(MESSAGES['sorry_input'], MESSAGES['donation'], '.')
-        donation_input = input('input_donate'.format(string_name))  # pragma no cover
+        donation_input = input(MESSAGES['input_donate'].format(string_name))  # pragma no cover
     return donation_input
 
 
@@ -141,13 +141,14 @@ def find_donor(string_name, donor_list):  # Tested
 def build_email(user_input):  # Tested
     """Build a thank-you email."""
     print(MESSAGES['border'])
-    email = 'insert email here for {} with donation {}'.format(user_input, DONORS[user_input][-1])
+    email = "Dear {}, {}".format(user_input, "\n" * 2) + "On behalf of our organization we would like to thank you for your donation of {}.{}".format(DONORS[user_input][-1], "\n" * 2) + "Kind regards,\nMailroom Madness\n{}".format(MESSAGES["border"])
+    #email = 'insert email here for {} with donation {}'.format(user_input, DONORS[user_input][-1])
     print(email)
     final_choice()
     return email
 
 
-def build_report(donor_list):
+def build_report(donor_list):  # Tested
     """Build a report showing donors sorted by donation."""
     print(MESSAGES['border'])
     report = "{:<30}{:<20}{:<20}{:<20}{}{}{}".format("Donor Name", "Total Donations", "# of Donations", "Avg. Amount", "\n", MESSAGES["border"], "\n")
