@@ -16,17 +16,18 @@ thank their donors.\n
 Would you like to write a thank you email to a donor
 or see a report of past donations?\n'''
 
+
 MESSAGES = {
     'welcome': WELCOME,
     'email_or_report': 'Type T for thank you or R for report: ',
     'return_prompt': 'Type B to return to main options.',
-    'quit': 'Type Q to quit the program anytime.',
+    'quit': 'Type Q to quit Mailroom Madness.',
     'sorry_prompt': 'Sorry, there is no option for what you typed.',
     'sorry_input': 'Sorry, please enter a ',
     'get_donor': 'Enter First and Last Name for donor or type L to see a list of donors: ',
     'donation': 'number',
     'donor_name': 'First and Last Name',
-    'input_donate': 'How much did {} donate?',
+    'input_donate': 'How much did {} donate? ',
     'goodbye': '\nThank you for using Mailroom Madness!\n',
     'border': '--------------------------------------------'
 }
@@ -36,12 +37,13 @@ def main():
     """Main function."""
     print(MESSAGES['welcome'])
     user_prompt()
+    final_choice()
 
 
 def user_prompt():
     """Function that prompts user to choose to write a thank you or build a report."""
     print(MESSAGES['quit'])
-    choice = validate_user_prompt()
+    choice = validate_user_prompt()  # pragma no cover
     if choice == 'R':
         build_report()
     elif choice == 'T':
@@ -54,7 +56,6 @@ def validate_user_prompt():
     """Check user input for thank you or report."""
     options = ['T', 'R', 'Q']
     user_input = input(MESSAGES['email_or_report']).upper()  # pragma no cover
-    print(user_input)
     while user_input not in options:
         print(MESSAGES['sorry_prompt'])
         user_input = input(MESSAGES['email_or_report']).upper()
@@ -64,7 +65,7 @@ def validate_user_prompt():
 def thank_you_email():
     """Function that creates the thank you email for the user."""
     print(MESSAGES['return_prompt'])
-    user_input = validate_user_name_input()
+    user_input = validate_user_name_input()  # pragma no cover
     if user_input == 'L':
         print(show_list(DONORS))
         thank_you_email()
@@ -72,7 +73,7 @@ def thank_you_email():
         user_prompt()
     else:
         add_donation(user_input, DONORS)
-        build_email()
+        build_email(user_input)
 
 
 def validate_user_name_input():
@@ -99,10 +100,10 @@ def show_list(donor_list):
 def add_donation(string_name, donor_list):
     """Add donation to donor."""
     find_donor(string_name, donor_list)
-    donation_input = validate_donation_input(string_name)
+    donation_input = validate_donation_input(string_name) # pragma no cover
     donor_list[string_name].append(float(donation_input))
     print(donor_list)
-    return donor_list
+    return donor_list[string_name]
 
 
 def validate_donation_input(string_name):
@@ -121,11 +122,12 @@ def find_donor(string_name, donor_list):
     return donor_list[string_name]
 
 
-def build_email():
+def build_email(user_input):
     """Build a thank-you email."""
     print(MESSAGES['border'])
-    print('<insert email here>')
-    final_choice()
+    email = 'insert email here for {} with donation {}'.format(user_input, DONORS[user_input][-1])
+    print(email)
+    return email
 
 
 def build_report():
@@ -133,12 +135,11 @@ def build_report():
     print(MESSAGES['border'])
     print('<insert report here>')
     print(DONORS)
-    final_choice()
 
 
 def final_choice():
     """Offer a choice to return to main options or exit."""
-    user_input = input('Type B to return to main options, or Q to exit: ').upper()
+    user_input = input(MESSAGES['return_prompt'] + MESSAGES['quit']).upper()  # pragma no cover
     # validate user input
     if user_input == 'B':
         user_prompt()
