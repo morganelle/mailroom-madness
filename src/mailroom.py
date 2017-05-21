@@ -155,6 +155,7 @@ def build_report():
         report = report + "{:<30}{:<20}{:<20}{:<20.2f}{}".format(name, sum(DONORS[name]), len(DONORS[name]), sum(DONORS[name]) / len(DONORS[name]), "\n")
     print(report)
     final_choice()
+    return report
 
 
 def final_choice():
