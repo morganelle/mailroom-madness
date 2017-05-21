@@ -43,13 +43,30 @@ def user_prompt():
     """Function that prompts user to choose to write a thank you or build a report."""
     user_input = input(MESSAGES['email_or_report'] + MESSAGES['quit']).upper()  # pragma no cover
     user_input = validate_user_prompt(user_input, ['T', 'R', 'Q'], user_prompt)
-    if user_input == 'R':
+    execute_user_choice(user_input)
+
+
+def execute_user_choice(user_input):
+    """Run function of valid user choice."""
+    if user_input == 'Q':
+        print(MESSAGES['goodbye'])
+        exit()
+        return 'quit'
+    elif user_input == 'R':
         build_report()
+        return 'report'
     elif user_input == 'T':
         thank_you_email()
+        return 'thank you'
+    elif user_input == 'B':
+        user_prompt()
+        return 'back'
     elif user_input == 'Q':
         print(MESSAGES['goodbye'])
         exit()
+        return 'quit'
+    else:
+        return None
 
 
 def validate_user_prompt(user_input, options, main_function):  # Tested
@@ -143,11 +160,7 @@ def final_choice():
     """Offer a choice to return to main options or exit."""
     user_input = input(MESSAGES['return_prompt'] + MESSAGES['quit']).upper()  # pragma no cover
     user_input = validate_user_prompt(user_input, ['B', 'Q'], final_choice)
-    if user_input == 'B':
-        user_prompt()
-    elif user_input == 'Q':
-        print(MESSAGES['goodbye'])
-        exit()
+    execute_user_choice(user_input)
 
 
 if __name__ == '__main__':  # pragma no cover
