@@ -15,11 +15,7 @@ DONORS_2 = {
 }
 
 
-REPORT_ENTRIES = [
-    'ANNA SHELBY                   325.00              3                   108.33',
-    'MORGAN NOMURA                 260.00              3                   86.67',
-    'EDGAR POE                     1000.00             1                   1000.00'
-]
+REPORT_ENTRY = 'EDGAR POE                     1000.00             1                   1000.00'
 
 
 def test_validate_user_prompt():
@@ -46,8 +42,7 @@ def test_build_email():
     assert 'EDGAR POE', 1000 in build_email('EDGAR POE')
 
 
-@pytest.mark.parametrize('string', REPORT_ENTRIES)
-def test_build_report(string):
+def test_build_report():
     """Test to determine if the correct donor and donation."""
     from mailroom import build_report
-    assert string in build_report(DONORS_2)
+    assert REPORT_ENTRY in build_report(DONORS_2)
