@@ -16,9 +16,9 @@ DONORS_2 = {
 
 
 REPORT_ENTRIES = [
-    'ANNA SHELBY                   325                 3                   108.33              ',
-    'MORGAN NOMURA                 260                 3                   86.67               ',
-    'EDGAR POE                     1000                1                   1000.00             '
+    'ANNA SHELBY                   325.00              3                   108.33',
+    'MORGAN NOMURA                 260.00              3                   86.67',
+    'EDGAR POE                     1000.00             1                   1000.00'
 ]
 
 
