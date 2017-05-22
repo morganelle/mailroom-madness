@@ -15,13 +15,13 @@ setup(
     authors='Anna, Morgan',
     author_email='morganelle@gmail.com',
     license='MIT',
-    py_modules=['mailroom', 'test_mailroom'],
+    py_modules=['mailroom_madness', 'test_mailroom_madness'],
     package_dir={'': 'src'},
     install_requires=dependences,
     extras_require=extra_packages,
     entry_points={
         'console_scripts': [
-            'mailroom=mailroom:main'
+            'mailroom_madness = mailroom_madness:main'
         ]
     }
 )
